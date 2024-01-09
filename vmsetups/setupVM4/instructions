@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Configure network adapters
+sudo cat /etc/network/interfaces > /etc/network/interfaces.backup
+mv interfaces /etc/network/interfaces
+
+# Static IP after first launch
+sudo ifconfig eth0 192.168.2.254
+sudo systemctl restart NetworkManager
+
+# Setup for mongoDB
+sudo apt install mongodb
+sudo service mongodb start
+sudo systemctl enable mongodb
+
+# Firewallsettings
+sudo apt install ufw
+sudo ./firewallsettings.sh

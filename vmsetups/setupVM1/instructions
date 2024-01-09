@@ -1,0 +1,13 @@
+# Configure Network adapters
+sudo cat /etc/network/interfaces > /etc/network/interfaces.backup
+sudo mv interfaces /etc/network/interfaces
+
+# Set IP on first launch
+sudo ifconfig eth0 192.168.0.100/24 up
+sudo systemctl restart NetworkManager
+
+# Add the CA-certificate to the trust store
+sudo cp cauthority.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+
+
